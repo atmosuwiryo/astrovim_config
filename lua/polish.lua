@@ -5,10 +5,18 @@
 -- Terminal
 function _G.set_terminal_keymaps()
   local opts = {buffer = 0}
-  vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)  -- escape from terminal's insert mode
+  local bufname = vim.fn.bufname()
+  
+  -- Only set the escape mapping for regular ToggleTerm terminals, not LazyGit
+  if vim.bo.buftype == "terminal" and 
+     string.find(bufname, "toggleterm") and 
+     not string.find(bufname:lower(), "lazygit") then
+    vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)  -- escape from terminal's insert mode
+  end
 end
--- if you only want these mappings for toggle term use term://*toggleterm#* instead
-vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+
+-- Apply the terminal keymaps check for all terminal buffers
+vim.cmd('autocmd! TermOpen * lua set_terminal_keymaps()')
 
 -- WinterIsComing theme
 vim.cmd("colorscheme WinterIsComing-dark-blue-color-theme")

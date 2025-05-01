@@ -49,14 +49,14 @@ return {
     version = false,
     opts = function()
       local opts = {
-        provider = "copilot",
+        provider = "claude-haiku",
         rag_service = {
           enabled = false,
         },
-        cursor_applying_provider = "copilot",
+        cursor_applying_provider = "claude",
         copilot = {
-          endpoint = "https://api.githubcopilot.com",
-          model = "claude-3.7-sonnet",
+          endpoint = "https://api.anthropic.com",
+          model = "claude-3-5-haiku-20241022",
           proxy = nil,
           allow_insecure = false,
           timeout = 60000,
