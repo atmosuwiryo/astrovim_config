@@ -49,33 +49,48 @@ return {
     version = false,
     opts = function()
       local opts = {
-        provider = "claude-haiku",
+        -- lmstudio is compatible with openai,
+        -- to use lmstudio in avante, we use openai with custom endpoint.
+        provider = "openai",
         rag_service = {
-          enabled = false,
+          enabled = true,
         },
-        cursor_applying_provider = "claude",
-        copilot = {
-          endpoint = "https://api.anthropic.com",
-          model = "claude-3-5-haiku-20241022",
-          proxy = nil,
-          allow_insecure = false,
-          timeout = 60000,
-          temperature = 0,
-          max_tokens = 32768,
-          disable_tools = true,
-          telemetry = false,
-          disabled_tools = {
-            "list_files",
-            "search_files",
-            "read_file",
-            "create_file",
-            "rename_file",
-            "delete_file",
-            "create_dir",
-            "rename_dir",
-            "delete_dir",
-            "bash",
+        cursor_applying_provider = "openai",
+        providers = {
+          openai = {
+            endpoint="http://127.0.0.1:1234/v1",
+            -- model = "qwen2.5-coder-3b-instruct-mlx@4bit",
+            -- model = "qwen2.5-coder-3b-instruct-mlx@8bit",
+            model = "deepseek-coder-v2-lite-instruct-mlx",
+            -- model = "deepseek-r1-distill-qwen-7b",
+            proxy = nil,
+            allow_insecure = false,
+            timeout = 60000,
+            extra_request_body = {
+              temperature = 0,
+              max_tokens = 32768,
+              max_completion_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
+              reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
+            },
+            disable_tools = true,
+            telemetry = false,
+            -- disabled_tools = {
+            --   "list_files",
+            --   "search_files",
+            --   "read_file",
+            --   "create_file",
+            --   "rename_file",
+            --   "delete_file",
+            --   "create_dir",
+            --   "rename_dir",
+            --   "delete_dir",
+            --   "bash",
+            -- },
           },
+          -- provider = "ollama",
+          -- ollama = {
+          --   model = "deepseek-coder:6.7b"
+          -- },
         },
         suggestion = {
           debounce = 900,
@@ -89,40 +104,51 @@ return {
           support_paste_from_clipboard = false,
           minimize_diff = true,
           enable_token_counting = true,
-          enable_cursor_planning_mode = true,
+          enable_cursor_planning_mode = false,
         },
-        mappings = {
-          --- @class AvanteConflictMappings
-          diff = {
-            ours = "co",
-            theirs = "ct",
-            all_theirs = "ca",
-            both = "cb",
-            cursor = "cc",
-            next = "]x",
-            prev = "[x",
-          },
-          suggestion = {
-            accept = "<M-l>",
-            next = "<M-]>",
-            prev = "<M-[>",
-            dismiss = "<C-]>",
-          },
-          jump = {
-            next = "]]",
-            prev = "[[",
-          },
-          submit = {
-            normal = "<CR>",
-            insert = "<C-s>",
-          },
-          sidebar = {
-            apply_all = "A",
-            apply_cursor = "a",
-            switch_windows = "<Tab>",
-            reverse_switch_windows = "<S-Tab>",
-          },
-        },
+        -- provider = "claude-haiku",
+        -- rag_service = {
+        --   enabled = false,
+        -- },
+        -- cursor_applying_provider = "claude",
+        -- copilot = {
+        --   endpoint = "https://api.anthropic.com",
+        --   model = "claude-3-5-haiku-20241022",
+        --   proxy = nil,
+        --   allow_insecure = false,
+        --   timeout = 60000,
+        --   temperature = 0,
+        --   max_tokens = 32768,
+        --   disable_tools = true,
+        --   telemetry = false,
+        --   disabled_tools = {
+        --     "list_files",
+        --     "search_files",
+        --     "read_file",
+        --     "create_file",
+        --     "rename_file",
+        --     "delete_file",
+        --     "create_dir",
+        --     "rename_dir",
+        --     "delete_dir",
+        --     "bash",
+        --   },
+        -- },
+        -- provider = "claude",
+        -- suggestion = {
+        --   debounce = 900,
+        --   throttle = 600,
+        -- },
+        -- behaviour = {
+        --   auto_suggestions = false,
+        --   auto_set_highlight_group = true,
+        --   auto_set_keymaps = true,
+        --   auto_apply_diff_after_generation = false,
+        --   support_paste_from_clipboard = false,
+        --   minimize_diff = true,
+        --   enable_token_counting = true,
+        --   enable_cursor_planning_mode = true,
+        -- },
       }
       if vim.env.USER == "abz" then
         -- opts.auto_suggestions_provider = "ollama"

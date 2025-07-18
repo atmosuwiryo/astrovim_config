@@ -18,8 +18,13 @@ end
 -- Apply the terminal keymaps check for all terminal buffers
 vim.cmd('autocmd! TermOpen * lua set_terminal_keymaps()')
 
+-- ToggleTerm Float Toggle Mapping
+vim.keymap.set({'n', 'i', 't'}, '<C-\\>', '<Cmd>ToggleTerm direction=float<CR>', { noremap = true, silent = true })
+
 -- WinterIsComing theme
-vim.cmd("colorscheme WinterIsComing-dark-blue-color-theme")
+-- vim.cmd("colorscheme WinterIsComing-dark-blue-color-theme")
+
+vim.cmd("colorscheme default")
 
 -- enable background transparency for all themes
 vim.cmd [[
