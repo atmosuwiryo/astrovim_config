@@ -1,3 +1,4 @@
+-- if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
 local avante_prompts = require("config.prompts").avante
 local function create_avante_call(prompt, use_context)
   if use_context then
@@ -16,33 +17,33 @@ local function create_avante_call(prompt, use_context)
 end
 
 return {
-  {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    event = "InsertEnter",
-    config = function()
-      require("copilot").setup({
-        filetypes = {
-          ["*"] = false,
-          avante = true,
-          c = true,
-          cpp = true,
-          go = true,
-          help = true,
-          html = true,
-          java = true,
-          javascript = true,
-          javascriptreact = true,
-          lua = true,
-          markdown = true,
-          python = true,
-          rust = true,
-          typescript = true,
-          typescriptreact = true,
-        },
-      })
-    end,
-  },
+  -- {
+  --   "zbirenbaum/copilot.lua",
+  --   cmd = "Copilot",
+  --   event = "InsertEnter",
+  --   config = function()
+  --     require("copilot").setup({
+  --       filetypes = {
+  --         ["*"] = false,
+  --         avante = true,
+  --         c = true,
+  --         cpp = true,
+  --         go = true,
+  --         help = true,
+  --         html = true,
+  --         java = true,
+  --         javascript = true,
+  --         javascriptreact = true,
+  --         lua = true,
+  --         markdown = true,
+  --         python = true,
+  --         rust = true,
+  --         typescript = true,
+  --         typescriptreact = true,
+  --       },
+  --     })
+  --   end,
+  -- },
   {
     "yetone/avante.nvim",
     -- event = "BufReadPost",
@@ -161,9 +162,9 @@ return {
         --     num_ctx = 32768,
         --   },
         -- }
-        opts.copilot.disable_tools = false
-        opts.auto_suggestions_provider = "copilot"
-        opts.memory_summary_provider = "copilot"
+        -- opts.copilot.disable_tools = false
+        -- opts.auto_suggestions_provider = "copilot"
+        -- opts.memory_summary_provider = "copilot"
         -- opts.cursor_applying_provider = "ollama"
         -- opts.rag_service = {
         --   enabled = true,

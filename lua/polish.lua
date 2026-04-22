@@ -6,10 +6,10 @@
 function _G.set_terminal_keymaps()
   local opts = {buffer = 0}
   local bufname = vim.fn.bufname()
-  
+
   -- Only set the escape mapping for regular ToggleTerm terminals, not LazyGit
-  if vim.bo.buftype == "terminal" and 
-     string.find(bufname, "toggleterm") and 
+  if vim.bo.buftype == "terminal" and
+     string.find(bufname, "toggleterm") and
      not string.find(bufname:lower(), "lazygit") then
     vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)  -- escape from terminal's insert mode
   end
